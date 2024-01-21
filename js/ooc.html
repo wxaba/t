@@ -5,14 +5,46 @@
 </head>
 <body>
     <div id="app">
+        <myheader></myheader>
         <h1>{{msg}}</h1>
+        <input type="text" v-model="msg"><br>
+        <p>点赞：{{count}}</p>
+        <button @click="clickhandle()">{{zandisplay}}</button>
     </div>
     <script>
-        const vm = Vue({
-            el:"#app",
+        const myheader = Vue.extend({
+            template:'<h1>haha</h1>',
             data(){
                 return{
                     msg:"haha"
+                }
+            }
+        })
+        const vm = new Vue({
+            components:{
+                myheader
+            },
+            el:"#app",
+            data(){
+                return{
+                    msg:"haha",
+                    count:0,
+                    flag:true,
+                    zandisplay:"　点赞　"
+                }
+            },
+            methods:{
+                clickhandle(){
+                    if(this.flag){
+                        this.count++;
+                        this.flag = false;
+                        this.zandisplay="取消点赞"
+                    }
+                    else{
+                        this.count--;
+                        this.flag = true;
+                        this.zandisplay="　点赞　"
+                    }
                 }
             }
         })
